@@ -31,9 +31,6 @@ body {
 header {
   background: var(--white);
   padding: 2rem 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
   border-bottom: 1px solid var(--border);
 }
 header .wrap {
@@ -294,6 +291,20 @@ header .wrap {
   overflow: hidden;
 }
 .product-page__main-wrap { position: relative; }
+.product-page__main-wrap--track { overflow: hidden; }
+.product-page__track { min-height: 0; }
+.product-page__slide {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product-page__slide .product-page__main-img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+  display: block;
+}
 .product-page__main-img {
   width: 100%;
   aspect-ratio: 1;

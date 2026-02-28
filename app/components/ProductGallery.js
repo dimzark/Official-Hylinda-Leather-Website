@@ -4,12 +4,16 @@ import { useState, useCallback, useRef } from 'react';
 import { getImageUrl } from '../../lib/data';
 
 const SWIPE_THRESHOLD = 50;
+const SNAP_DURATION_MS = 300;
 
 export default function ProductGallery({ product }) {
   const images = product.images && product.images.length ? product.images : product.featured_image ? [product.featured_image] : [];
   const [index, setIndex] = useState(0);
   const [fullscreen, setFullscreen] = useState(false);
+  const [dragOffset, setDragOffset] = useState(0);
+  const [isDragging, setIsDragging] = useState(false);
   const touchStartX = useRef(0);
+  const isDraggingRef = useRef(false);
 
   const currentImg = images[index];
   const currentSrc = currentImg ? getImageUrl(currentImg) : '';
@@ -21,17 +25,41 @@ export default function ProductGallery({ product }) {
     [images.length]
   );
 
+  const clampDrag = useCallback(
+    (delta) => {
+      if (images.length <= 1) return 0;
+      if (index === 0 && delta > 0) return 0;
+      if (index === images.length - 1 && delta < 0) return 0;
+      return delta;
+    },
+    [images.length, index]
+  );
+
   const handleTouchStart = useCallback((e) => {
     touchStartX.current = e.touches[0].clientX;
+    isDraggingRef.current = true;
+    setIsDragging(true);
+    setDragOffset(0);
   }, []);
+
+  const handleTouchMove = useCallback(
+    (e) => {
+      if (images.length <= 1 || !isDraggingRef.current) return;
+      const delta = e.touches[0].clientX - touchStartX.current;
+      setDragOffset(clampDrag(delta));
+    },
+    [images.length, clampDrag]
+  );
 
   const handleTouchEnd = useCallback(
     (e) => {
       if (images.length <= 1) return;
-      const endX = e.changedTouches[0].clientX;
-      const delta = endX - touchStartX.current;
-      if (delta < -SWIPE_THRESHOLD) go(1);   // swipe left -> next
-      if (delta > SWIPE_THRESHOLD) go(-1);   // swipe right -> prev
+      isDraggingRef.current = false;
+      setIsDragging(false);
+      const delta = e.changedTouches[0].clientX - touchStartX.current;
+      if (delta < -SWIPE_THRESHOLD) go(1);
+      else if (delta > SWIPE_THRESHOLD) go(-1);
+      setDragOffset(0);
     },
     [images.length, go]
   );
@@ -40,19 +68,35 @@ export default function ProductGallery({ product }) {
     return <div className="product-page__main-wrap" style={{ aspectRatio: 1, background: 'var(--off2)' }} />;
   }
 
+  const trackStyle = {
+    display: 'flex',
+    width: `${images.length * 100}%`,
+    transform: `translateX(calc(-${index * 100}% + ${dragOffset}px))`,
+    transition: isDragging ? 'none' : `transform ${SNAP_DURATION_MS}ms ease-out`,
+  };
+  const slideStyle = { flex: `0 0 ${100 / images.length}%` };
+
   return (
     <>
       <div
-        className="product-page__main-wrap"
+        className="product-page__main-wrap product-page__main-wrap--track"
         style={{ touchAction: 'pan-y' }}
         onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <img
-          className="product-page__main-img"
-          src={currentSrc}
-          alt={product.title || ''}
-        />
+        <div className="product-page__track" style={trackStyle}>
+          {images.map((path, i) => (
+            <div key={i} className="product-page__slide" style={slideStyle}>
+              <img
+                className="product-page__main-img"
+                src={getImageUrl(path)}
+                alt={i === index ? (product.title || '') : ''}
+                draggable={false}
+              />
+            </div>
+          ))}
+        </div>
         {images.length > 1 && (
           <>
             <button
@@ -119,6 +163,7 @@ export default function ProductGallery({ product }) {
           }}
           onClick={(e) => e.target === e.currentTarget && setFullscreen(false)}
           onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
           <button
@@ -189,12 +234,57 @@ export default function ProductGallery({ product }) {
               </button>
             </>
           )}
-          <img
-            src={currentSrc}
-            alt={product.title || ''}
-            style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
-            onClick={(e) => e.stopPropagation()}
-          />
+          <div
+            className="fullscreen-overlay__track-wrap"
+            style={{
+              position: 'relative',
+              width: '100%',
+              maxHeight: '100%',
+              flex: 1,
+              overflow: 'hidden',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              touchAction: 'pan-y',
+            }}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <div
+              className="fullscreen-overlay__track"
+              style={{
+                display: 'flex',
+                width: `${images.length * 100}%`,
+                transform: `translateX(calc(-${index * 100}% + ${dragOffset}px))`,
+                transition: isDragging ? 'none' : `transform ${SNAP_DURATION_MS}ms ease-out`,
+                height: '100%',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              {images.map((path, i) => (
+                <div
+                  key={i}
+                  style={{
+                    flex: `0 0 ${100 / images.length}%`,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '0 0.5rem',
+                  }}
+                >
+                  <img
+                    src={getImageUrl(path)}
+                    alt={product.title || ''}
+                    style={{ maxWidth: '100%', maxHeight: '85vh', objectFit: 'contain' }}
+                    onClick={(e) => e.stopPropagation()}
+                    draggable={false}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       )}
     </>
