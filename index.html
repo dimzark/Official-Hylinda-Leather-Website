@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hylinda Leather — Hand Crafted Leather Goods</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #ffffff;
+      --off: #fafafa;
+      --off2: #f5f5f5;
+      --ink: #1a1a1a;
+      --ink-light: #555;
+      --ink-muted: #888;
+      --border: rgba(0, 0, 0, 0.06);
+      --radius: 8px;
+      --space: 1.5rem;
+      --space-lg: 3rem;
+      --space-xl: 5rem;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 400;
+      background: var(--white);
+      color: var(--ink);
+      line-height: 1.7;
+      min-height: 100vh;
+      letter-spacing: 0.02em;
+    }
+    .font-serif { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    /* Header */
+    header {
+      background: var(--white);
+      padding: 2rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+    }
+    header .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+    .logo-link {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .logo-img {
+      height: 40px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+    .logo-text { font-family: 'Plus Jakarta Sans', sans-serif; font-size: 1.25rem; font-weight: 600; letter-spacing: 0.02em; }
+    .tagline {
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: var(--ink-muted);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+    header a {
+      color: var(--ink-light);
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+    }
+    header a:hover { color: var(--ink); }
+    .header__search {
+      width: 140px;
+      padding: 0.4rem 0 0.35rem;
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--ink);
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      outline: none;
+      letter-spacing: 0.02em;
+      transition: border-color 0.2s;
+    }
+    .header__search::placeholder { color: var(--ink-muted); }
+    .header__search:focus { border-bottom-color: var(--ink); }
+
+    /* Hero — minimal, image behind text */
+    .hero {
+      position: relative;
+      padding: 6rem 1.5rem 5rem;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('public/uploads/2018/03/IMG_2810-copy-2.jpg') center / cover no-repeat;
+      z-index: 0;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255, 255, 255, 0.88);
+      z-index: 1;
+    }
+    .hero h1,
+    .hero p {
+      position: relative;
+      z-index: 2;
+    }
+    .hero h1 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 0.6rem;
+      letter-spacing: 0.06em;
+      line-height: 1.25;
+    }
+    .hero p {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: var(--ink-light);
+      max-width: 420px;
+      margin: 0 auto;
+      letter-spacing: 0.03em;
+    }
+
+    /* Tags */
+    .toolbar {
+      padding: 2.5rem 1.5rem var(--space-lg);
+      border-bottom: 1px solid var(--border);
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    .tag {
+      padding: 0.4rem 0.9rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.08em;
+      color: var(--ink-light);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .tag:hover,
+    .tag.active {
+      color: var(--ink);
+      border-color: var(--ink);
+      background: var(--off2);
+    }
+
+    /* About */
+    .about {
+      background: var(--off);
+      padding: var(--space-xl) 1.5rem;
+    }
+    .about .wrap { max-width: 640px; margin: 0 auto; }
+    .about h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: var(--ink);
+    }
+    .about__story p {
+      margin-bottom: 1.25rem;
+      font-size: 0.9rem;
+      color: var(--ink-light);
+      font-weight: 300;
+    }
+    .about__tagline {
+      text-align: center;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--ink-muted);
+      margin-top: 2rem;
+      letter-spacing: 0.1em;
+    }
+    .video-section {
+      padding: var(--space-xl) 1.5rem;
+      background: var(--off);
+    }
+    .video-section .wrap { max-width: 800px; margin: 0 auto; }
+    .video-section h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-bottom: 1.25rem;
+      text-align: center;
+    }
+    .video-section__embed {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+      background: var(--off2);
+    }
+    .video-section__embed iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Collection */
+    .collection {
+      padding: var(--space-xl) 1.5rem;
+    }
+    .collection h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-bottom: var(--space-lg);
+      text-align: center;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+    .product-card {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      transition: opacity 0.25s ease;
+      color: inherit;
+      text-decoration: none;
+    }
+    .product-card:hover { opacity: 0.85; }
+    .product-card:focus { outline: none; }
+    .product-card:focus-visible { outline: 2px solid var(--ink-muted); outline-offset: 2px; border-radius: var(--radius); }
+    .product-card__img-wrap {
+      aspect-ratio: 4/3;
+      background: var(--off2);
+      overflow: hidden;
+      margin-bottom: 1rem;
+      border-radius: var(--radius);
+    }
+    .product-card__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+    .product-card:hover .product-card__img { transform: scale(1.02); }
+    .product-card__img[src=""],
+    .product-card__img:not([src]) { opacity: 0.4; }
+    .product-card__body { flex: 1; }
+    .product-card__title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      line-height: 1.4;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+      letter-spacing: 0.03em;
+    }
+    .product-card__price {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      font-weight: 400;
+    }
+    .product-card__desc {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      margin-top: 0.5rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .product-card.hidden { display: none; }
+
+    /* No results */
+    .no-results {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: var(--ink-muted);
+      font-size: 0.9rem;
+    }
+
+    /* Product page (dedicated page view) */
+    .home-view { display: block; }
+    .product-page { display: none; padding-bottom: var(--space-xl); }
+    .product-page.active { display: block; }
+    .product-page.active ~ .home-view,
+    body.product-view .home-view { display: none !important; }
+    body.product-view .product-page.active { display: block !important; }
+
+    .product-page__back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 1.5rem;
+      color: var(--ink-muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.05em;
+    }
+    .product-page__back:hover { color: var(--ink); }
+    .product-page__layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+    @media (max-width: 768px) {
+      .hero { display: none; }
+      .toolbar { display: none; }
+      .collection { padding-top: var(--space); }
+      .product-page__layout { grid-template-columns: 1fr; }
+    }
+    .product-page__gallery {
+      background: var(--off2);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .product-page__main-wrap { position: relative; }
+    .product-page__main-img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: contain;
+      display: block;
+      transition: opacity 0.2s ease;
+    }
+    .product-page__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      opacity: 0.9;
+      transition: opacity 0.2s, transform 0.2s;
+      z-index: 2;
+    }
+    .product-page__nav:hover { opacity: 1; transform: translateY(-50%) scale(1.05); }
+    .product-page__nav:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+    .product-page__nav--prev { left: 12px; }
+    .product-page__nav--next { right: 12px; }
+    .product-page__nav svg { width: 20px; height: 20px; }
+    .product-page__fullscreen {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: var(--radius);
+      background: var(--white);
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+      opacity: 0.9;
+      transition: opacity 0.2s;
+      z-index: 2;
+    }
+    .product-page__fullscreen:hover { opacity: 1; }
+    .product-page__fullscreen svg { width: 20px; height: 20px; }
+    /* Fullscreen overlay */
+    .fullscreen-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 300;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .fullscreen-overlay.open { display: flex; }
+    .fullscreen-overlay img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    .fullscreen-overlay__close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--ink);
+      cursor: pointer;
+      font-size: 1.5rem;
+      line-height: 1;
+      z-index: 301;
+    }
+    .fullscreen-overlay__close:hover { background: var(--off2); }
+    .fullscreen-overlay__nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 48px;
+      height: 48px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--ink);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 301;
+      opacity: 0.9;
+      transition: opacity 0.2s;
+    }
+    .fullscreen-overlay__nav:hover { opacity: 1; }
+    .fullscreen-overlay__nav--prev { left: 1.5rem; }
+    .fullscreen-overlay__nav--next { right: 1.5rem; }
+    .fullscreen-overlay__nav svg { width: 24px; height: 24px; }
+    .fullscreen-overlay__nav[hidden] { display: none; }
+    .product-page__thumbs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .product-page__thumb {
+      width: 56px;
+      height: 56px;
+      padding: 0;
+      border: 2px solid transparent;
+      background: var(--white);
+      cursor: pointer;
+      flex-shrink: 0;
+      border-radius: var(--radius);
+      overflow: hidden;
+      transition: border-color 0.2s, opacity 0.2s;
+    }
+    .product-page__thumb:hover { opacity: 0.9; }
+    .product-page__thumb.active { border-color: var(--ink); }
+    .product-page__thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .product-page__detail {}
+    .product-page__title {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.03em;
+      line-height: 1.3;
+    }
+    .product-page__price { font-size: 1rem; color: var(--ink-muted); margin-bottom: 1.25rem; }
+    .product-page__description {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--ink-light);
+      font-weight: 300;
+    }
+    .product-page__description h3 { font-size: 1rem; margin: 1rem 0 0.4rem; font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 600; }
+    .product-page__description ul,
+    .product-page__description .product-page__details-block {
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      padding: 1.25rem 1.5rem;
+      padding-left: 1.75rem;
+      border-top: 1px solid var(--border);
+      background: var(--off2);
+      border-radius: var(--radius);
+      list-style-position: outside;
+    }
+    .product-page__description .product-page__details-block { list-style: none; line-height: 1.7; }
+    .product-page__description ul li { margin-bottom: 0.35rem; }
+    .product-page__description ul li:last-child { margin-bottom: 0; }
+    .product-page__description a { color: var(--ink); text-decoration: underline; }
+    .product-page__order-note {
+      font-size: 0.85rem;
+      color: var(--ink-muted);
+      margin-top: 1.25rem;
+      margin-bottom: 0.75rem;
+    }
+    .product-page__order-btn {
+      display: inline-block;
+      padding: 0.65rem 1.5rem;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--white);
+      background: var(--ink);
+      border: none;
+      border-radius: var(--radius);
+      text-decoration: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .product-page__order-btn:hover { opacity: 0.88; }
+
+    .product-page__related {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      grid-column: 1 / -1;
+    }
+    .product-page__related h2 {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--ink-muted);
+      margin-bottom: 1.5rem;
+    }
+    .product-page__related .products-grid {
+      gap: 1.5rem;
+    }
+    .product-page__related .product-card {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--off);
+      padding: var(--space-lg) 1.5rem;
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      border-top: 1px solid var(--border);
+    }
+    footer .wrap { max-width: 640px; margin: 0 auto; text-align: center; }
+    footer a { color: var(--ink-muted); text-decoration: none; }
+    footer a:hover { color: var(--ink); }
+    .footer__contact { display: flex; align-items: center; justify-content: center; gap: 1.25rem; flex-wrap: wrap; }
+    .footer__contact span { display: inline-block; }
+    .footer__contact a { display: inline-flex; align-items: center; color: var(--ink-muted); }
+    .footer__contact a:hover { color: var(--ink); }
+    .footer__social-icon { width: 20px; height: 20px; }
+    .footer__copyright { margin-top: 1.5rem; font-size: 0.8rem; color: var(--ink-muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <a href="#" class="logo-link" id="logo-link">
+        <img src="public/uploads/2018/03/cropped-hylinda-1-1.jpg" alt="Hylinda Leather" class="logo-img" width="40" height="40">
+        <div>
+          <div class="logo-text">Hylinda Leather</div>
+          <div class="tagline">Hand crafted leather goods</div>
+        </div>
+      </a>
+      <input type="search" class="header__search" id="search" placeholder="Search" aria-label="Search products">
+    </div>
+  </header>
+  <main>
+    <!-- Product detail page (shown when hash is #product/ID) -->
+    <section class="product-page" id="product-page">
+      <div class="wrap" style="max-width: 1100px; padding: 0 2rem;">
+        <a href="#" class="product-page__back" id="product-page-back">← Back to collection</a>
+      </div>
+      <div class="product-page__layout">
+        <div class="product-page__gallery">
+          <div class="product-page__main-wrap">
+            <img class="product-page__main-img" id="product-page-main-img" alt="">
+            <button type="button" class="product-page__nav product-page__nav--prev" id="product-page-prev" aria-label="Previous image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+            <button type="button" class="product-page__nav product-page__nav--next" id="product-page-next" aria-label="Next image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+            <button type="button" class="product-page__fullscreen" id="product-page-fullscreen" aria-label="View full screen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"/></svg></button>
+          </div>
+          <div class="product-page__thumbs" id="product-page-thumbs" role="tablist"></div>
+        </div>
+        <div class="product-page__detail">
+          <h1 class="product-page__title" id="product-page-title"></h1>
+          <p class="product-page__price" id="product-page-price"></p>
+          <div class="product-page__description" id="product-page-description"></div>
+          <p class="product-page__order-note">Made to order. Inquire for availability and details.</p>
+          <a href="#" class="product-page__order-btn" id="product-page-order-btn">Order / Inquire</a>
+        </div>
+        <div class="product-page__related">
+          <h2>You might also like</h2>
+          <div class="products-grid" id="product-page-related-grid"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Home: hero, search, collection, about -->
+    <div class="home-view" id="home-view">
+      <section class="hero">
+        <h1 id="hero-headline">Your personal compass</h1>
+        <p id="hero-desc">Genuine leather bags and accessories — designed and handcrafted with care.</p>
+      </section>
+      <section class="toolbar">
+        <div class="tags" id="tags"></div>
+      </section>
+      <section class="collection">
+        <div class="wrap">
+          <h2>Collection</h2>
+          <div class="products-grid" id="products-grid"></div>
+          <p class="no-results" id="no-results" style="display: none;">No products match your search.</p>
+        </div>
+      </section>
+      <section class="about" id="about">
+        <div class="wrap">
+          <h2>About</h2>
+          <div class="about__story" id="about-story"></div>
+          <p class="about__tagline" id="about-tagline">Your Personal Compass</p>
+        </div>
+      </section>
+      <section class="video-section">
+        <div class="wrap">
+          <h2>Watch</h2>
+          <div class="video-section__embed">
+            <iframe src="https://www.youtube.com/embed/mCx7y4d3Pk8" title="Hylinda Leather" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+  <footer>
+    <div class="wrap">
+      <div class="footer__contact" id="footer-contact"></div>
+      <p class="footer__copyright" id="footer-copyright"></p>
+    </div>
+  </footer>
+  <div class="fullscreen-overlay" id="fullscreen-overlay">
+    <button type="button" class="fullscreen-overlay__nav fullscreen-overlay__nav--prev" id="fullscreen-overlay-prev" aria-label="Previous image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <img id="fullscreen-overlay-img" src="" alt="">
+    <button type="button" class="fullscreen-overlay__nav fullscreen-overlay__nav--next" id="fullscreen-overlay-next" aria-label="Next image"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
+    <button type="button" class="fullscreen-overlay__close" id="fullscreen-overlay-close" aria-label="Close">&times;</button>
+  </div>
+  <script>
+    window.BRAND = {
+      heroHeadline: "Your personal compass",
+      heroDesc: "Genuine leather bags and accessories — designed and handcrafted with care.",
+      aboutStory: [
+        "Creation and inspiration are two ideas that always intrigue us. We didn't know where to start from, we needed a compass to show us the way. So we came up with Hylinda Leather.",
+        "Hylinda Leather became our personal compass that guided us. We started taking pieces of pure leather and transforming them in something beautiful, a piece of work that reflected ourselves, what we were feeling and who we wanted to be.",
+        "The whole procedure is so important to us. That's why we always treat our products with love and care.",
+        "We are big fans of the whole traveling idea. We love exploring new destinations and even though we don't like cliché quotes we totally believe that difficult roads always lead to beautiful destinations.",
+        "We want Hylinda to be the compass that everyone needs in order to explore new destinations, to see beautiful places and find themselves through the process."
+      ],
+      tagline: "Your Personal Compass",
+      contact: {
+        email: "info@hylindaleather.com",
+        facebook: "https://el-gr.facebook.com/HylindaLeather/",
+        instagram: "https://www.instagram.com/hylindaleather/"
+      }
+    };
+  </script>
+  <script src="products.js"></script>
+  <script>
+    (function() {
+      const IMAGE_BASE = 'public/uploads/';
+      const products = (window.PRODUCTS || []).filter(function(p) { return (p.title || '').trim() !== 'Black Leather MacBook Case'; });
+      products.sort(function(a, b) {
+        function order(p) {
+          var t = (p.title || '').toUpperCase();
+          if (t.indexOf('BRASOV') === 0) return 0;
+          if (t.indexOf('CHICAGO') === 0) return 1;
+          if (t.indexOf('ADELAIDE') === 0) return 2;
+          if (t.indexOf('NARVA') === 0) return 3;
+          if (t.indexOf('MEDELLIN') === 0) return 4;
+          if (/CAMERA|PHOTOGRAPHY/.test(t)) return 6;
+          return 5;
+        }
+        return order(a) - order(b);
+      });
+      const brand = window.BRAND || {};
+
+      // Tag keywords → display label (order defines tag order)
+      const TAG_MAP = [
+        { key: 'all', label: 'All' },
+        { key: 'backpack', label: 'Backpack' },
+        { key: 'shoulder', label: 'Shoulder' },
+        { key: 'tote', label: 'Tote' },
+        { key: 'clutch', label: 'Clutch' },
+        { key: 'cross-body', label: 'Cross-body' },
+        { key: 'bucket', label: 'Bucket' },
+        { key: 'handbag', label: 'Handbag' },
+        { key: 'camera', label: 'Camera' },
+        { key: 'cardholder', label: 'Cardholder' },
+        { key: 'passport', label: 'Passport' },
+        { key: 'moleskine', label: 'Moleskine' },
+        { key: 'accessories', label: 'Accessories' }
+      ];
+
+      function getProductBySlug(slug) {
+        var s = String(slug || '').replace(/\/$/, '');
+        return products.find(function(p) { return (p.slug || '').toString() === s || String(p.id) === s; }) || null;
+      }
+      function rewriteProductLinks(html) {
+        if (!html) return '';
+        return String(html).replace(/href=["']https?:\/\/(?:www\.)?hylindaleather\.com\/product\/([^"'\s\/?#]+)[^"']*["']/gi, function(match, pathSeg) {
+          var p = getProductBySlug(pathSeg);
+          return p ? 'href="#product/' + p.id + '"' : match;
+        });
+      }
+      function getProductTags(p) {
+        const t = (p.title || '') + ' ' + (p.slug || '') + ' ' + (p.short_description || '');
+        const lower = t.toLowerCase();
+        const out = ['all'];
+        TAG_MAP.forEach(function(item) {
+          if (item.key === 'all') return;
+          if (lower.indexOf(item.key) !== -1) out.push(item.key);
+        });
+        if (out.length === 1) out.push('accessories');
+        return out;
+      }
+
+      if (brand.heroHeadline) {
+        document.getElementById('hero-headline').textContent = brand.heroHeadline;
+        if (brand.heroDesc) document.getElementById('hero-desc').textContent = brand.heroDesc;
+      }
+      if (brand.aboutStory && brand.aboutStory.length) {
+        document.getElementById('about-story').innerHTML = brand.aboutStory.map(function(p) { return '<p>' + p + '</p>'; }).join('');
+        if (brand.tagline) document.getElementById('about-tagline').textContent = brand.tagline;
+      }
+      if (brand.contact) {
+        var c = brand.contact;
+        var html = '';
+        if (c.email) html += '<span><a href="mailto:' + c.email + '">' + c.email + '</a></span>';
+        if (c.address) html += '<span>' + c.address + '</span>';
+        if (c.facebook) html += '<a href="' + c.facebook + '" target="_blank" rel="noopener" aria-label="Facebook"><svg class="footer__social-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>';
+        if (c.instagram) html += '<a href="' + c.instagram + '" target="_blank" rel="noopener" aria-label="Instagram"><svg class="footer__social-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>';
+        document.getElementById('footer-contact').innerHTML = html;
+      }
+      document.getElementById('footer-copyright').textContent = '\u00A9 ' + new Date().getFullYear() + ' Hylinda Leather';
+
+      function imgUrl(path) {
+        if (!path) return '';
+        return IMAGE_BASE + path;
+      }
+      function stripHtml(html) {
+        if (!html) return '';
+        var div = document.createElement('div');
+        div.innerHTML = html.replace(/\r\n/g, ' ').replace(/\n/g, ' ');
+        return div.textContent || div.innerText || '';
+      }
+      function wrapDetailsBlock(html) {
+        if (!html) return '';
+        var s = String(html);
+        s = s.replace(/<strong>\s*Details\s*:?\s*<\/strong>/gi, 'Details: ');
+        s = s.replace(/<strong>\s*Details\s*<\/strong>\s*:?\s*/gi, 'Details: ');
+        return s.replace(/(Details\s*:?\s*)(?:<\/[^>]+>)?\s*(?:\n|<br\s*\/?>)\s*((?:(?:[\u2022\u2042\u2043‣][^\n<]*(?:\n|<br\s*\/?>)\s*)*)(?:[\u2022\u2042\u2043‣][^\n<]*))/gi, function(_, _label, lines) {
+          var raw = lines.replace(/\n/g, '<br>').replace(/<br\s*\/?>/gi, '<br>').trim();
+          var items = raw.split(/<br\s*\/?>/gi).map(function(line) { return line.trim(); }).filter(Boolean);
+          function isGenuineLeather(t) { return /genuine\s+leather/i.test(t); }
+          function isDimensions(t) { return /[HLWD]:\s*\d|\d+\s*cm/i.test(t); }
+          var sorted = items.slice().sort(function(a, b) {
+            var aGen = isGenuineLeather(a) ? 0 : 1;
+            var bGen = isGenuineLeather(b) ? 0 : 1;
+            if (aGen !== bGen) return aGen - bGen;
+            var aDim = isDimensions(a) ? 0 : 1;
+            var bDim = isDimensions(b) ? 0 : 1;
+            if (aDim !== bDim) return aDim - bDim;
+            return 0;
+          });
+          var content = sorted.join('<br>');
+          return '<div class="product-page__details-block">' + content + '</div>';
+        });
+      }
+
+      var activeTag = 'all';
+      var searchQuery = '';
+
+      function filterProducts() {
+        return products.filter(function(p) {
+          var matchTag = activeTag === 'all' || getProductTags(p).indexOf(activeTag) !== -1;
+          if (!matchTag) return false;
+          if (!searchQuery) return true;
+          var text = (p.title || '') + ' ' + (p.slug || '') + ' ' + stripHtml(p.short_description || '') + ' ' + stripHtml(p.description || '');
+          return text.toLowerCase().indexOf(searchQuery.toLowerCase()) !== -1;
+        });
+      }
+
+      function renderTags() {
+        var container = document.getElementById('tags');
+        container.innerHTML = TAG_MAP.map(function(item) {
+          return '<button type="button" class="tag' + (activeTag === item.key ? ' active' : '') + '" data-tag="' + item.key + '">' + item.label + '</button>';
+        }).join('');
+        container.querySelectorAll('.tag').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            activeTag = btn.dataset.tag;
+            document.querySelectorAll('#tags .tag').forEach(function(b) { b.classList.remove('active'); });
+            btn.classList.add('active');
+            renderCards();
+          });
+        });
+      }
+
+      function renderCards() {
+        var filtered = filterProducts();
+        var grid = document.getElementById('products-grid');
+        var noResults = document.getElementById('no-results');
+        noResults.style.display = filtered.length ? 'none' : 'block';
+        grid.innerHTML = filtered.map(function(p) {
+          var img = (p.images && p.images[0]) ? imgUrl(p.images[0]) : '';
+          var short = stripHtml(p.short_description || '').slice(0, 100) + (stripHtml(p.short_description || '').length > 100 ? '…' : '');
+          var price = p.price ? '€' + p.price : '';
+          return '<a href="#product/' + p.id + '" class="product-card" data-id="' + p.id + '">' +
+            '<div class="product-card__img-wrap">' +
+              '<img class="product-card__img" src="' + img + '" alt="' + (p.title || '').replace(/"/g, '&quot;') + '" loading="lazy" onerror="this.style.visibility=\'hidden\'">' +
+            '</div>' +
+            '<div class="product-card__body">' +
+              '<h3 class="product-card__title">' + (p.title || '').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</h3>' +
+              (price ? '<p class="product-card__price">' + price + '</p>' : '') +
+              '<p class="product-card__desc">' + short.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>' +
+            '</div></a>';
+        }).join('');
+      }
+
+      function getRelatedProducts(p, limit) {
+        limit = limit || 6;
+        var myTags = getProductTags(p);
+        var others = products.filter(function(x) { return x.id !== p.id; });
+        var withSharedTag = others.filter(function(x) {
+          var t = getProductTags(x);
+          return t.some(function(tag) { return tag !== 'all' && myTags.indexOf(tag) !== -1; });
+        });
+        var pool = withSharedTag.length >= limit ? withSharedTag : others;
+        var out = [];
+        for (var i = 0; i < pool.length && out.length < limit; i++) out.push(pool[i]);
+        return out;
+      }
+
+      var currentProductImages = [];
+      var currentProductImageIndex = 0;
+
+      function setProductImageIndex(index) {
+        var imgs = currentProductImages;
+        if (!imgs.length) return;
+        currentProductImageIndex = (index + imgs.length) % imgs.length;
+        var mainImg = document.getElementById('product-page-main-img');
+        var thumbsEl = document.getElementById('product-page-thumbs');
+        mainImg.src = imgUrl(imgs[currentProductImageIndex]);
+        thumbsEl.querySelectorAll('.product-page__thumb').forEach(function(b) {
+          var i = parseInt(b.dataset.index, 10);
+          var active = i === currentProductImageIndex;
+          b.classList.toggle('active', active);
+          b.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+      }
+
+      var savedMainScrollY = null;
+      function renderProductPage(id) {
+        var p = products.find(function(x) { return x.id === id; });
+        if (!p) { showView('home'); return; }
+        savedMainScrollY = window.scrollY || window.pageYOffset || 0;
+        document.body.classList.add('product-view');
+        document.getElementById('home-view').style.display = 'none';
+        var page = document.getElementById('product-page');
+        page.classList.add('active');
+        page.style.display = 'block';
+
+        var mainImg = document.getElementById('product-page-main-img');
+        var thumbsEl = document.getElementById('product-page-thumbs');
+        var imgs = p.images || [];
+        currentProductImages = imgs;
+        currentProductImageIndex = 0;
+        mainImg.src = imgs[0] ? imgUrl(imgs[0]) : '';
+        mainImg.alt = p.title || '';
+        thumbsEl.innerHTML = imgs.map(function(path, i) {
+          return '<button type="button" class="product-page__thumb' + (i === 0 ? ' active' : '') + '" data-index="' + i + '" role="tab" aria-selected="' + (i === 0 ? 'true' : 'false') + '"><img src="' + imgUrl(path) + '" alt=""></button>';
+        }).join('');
+
+        var prevBtn = document.getElementById('product-page-prev');
+        var nextBtn = document.getElementById('product-page-next');
+        prevBtn.style.display = imgs.length > 1 ? '' : 'none';
+        nextBtn.style.display = imgs.length > 1 ? '' : 'none';
+
+        thumbsEl.querySelectorAll('.product-page__thumb').forEach(function(btn) {
+          btn.addEventListener('click', function() {
+            setProductImageIndex(parseInt(btn.dataset.index, 10));
+          });
+        });
+        prevBtn.onclick = function() { setProductImageIndex(currentProductImageIndex - 1); };
+        nextBtn.onclick = function() { setProductImageIndex(currentProductImageIndex + 1); };
+
+        var fullscreenBtn = document.getElementById('product-page-fullscreen');
+        var overlay = document.getElementById('fullscreen-overlay');
+        var overlayImg = document.getElementById('fullscreen-overlay-img');
+        var overlayPrev = document.getElementById('fullscreen-overlay-prev');
+        var overlayNext = document.getElementById('fullscreen-overlay-next');
+        fullscreenBtn.onclick = function() {
+          if (!imgs.length) return;
+          overlayImg.src = imgUrl(imgs[currentProductImageIndex]);
+          overlayImg.alt = p.title || '';
+          overlayPrev.hidden = imgs.length <= 1;
+          overlayNext.hidden = imgs.length <= 1;
+          overlay.classList.add('open');
+          document.body.style.overflow = 'hidden';
+        };
+
+        document.getElementById('product-page-title').textContent = p.title || '';
+        document.getElementById('product-page-price').textContent = p.price ? '€' + p.price : '';
+        var descEl = document.getElementById('product-page-description');
+        var raw = (p.description || '').replace(/\r\n/g, '\n').replace(/rn/g, '\n');
+        raw = raw.replace(/\s*Ready to ship in [\d\-]+ business days\.?\s*/gi, ' ').replace(/\n{3,}/g, '\n\n').trim();
+        raw = wrapDetailsBlock(raw);
+        raw = rewriteProductLinks(raw);
+        descEl.innerHTML = raw || '<p>' + stripHtml(p.short_description || '') + '</p>';
+
+        var orderBtn = document.getElementById('product-page-order-btn');
+        orderBtn.href = 'mailto:hylindaleather@gmail.com?subject=' + encodeURIComponent('Interest in ' + (p.title || 'Product')) + '&body=' + encodeURIComponent('I would like to buy ' + (p.title || 'this product') + '. Can you give me more details about the availability?');
+
+        var related = getRelatedProducts(p, 6);
+        var relatedGrid = document.getElementById('product-page-related-grid');
+        relatedGrid.innerHTML = related.map(function(r) {
+          var img = (r.images && r.images[0]) ? imgUrl(r.images[0]) : '';
+          var short = stripHtml(r.short_description || '').slice(0, 80) + (stripHtml(r.short_description || '').length > 80 ? '…' : '');
+          var price = r.price ? '€' + r.price : '';
+          return '<a href="#product/' + r.id + '" class="product-card" data-id="' + r.id + '">' +
+            '<div class="product-card__img-wrap"><img class="product-card__img" src="' + img + '" alt="' + (r.title || '').replace(/"/g, '&quot;') + '" loading="lazy" onerror="this.style.visibility=\'hidden\'"></div>' +
+            '<div class="product-card__body">' +
+              '<h3 class="product-card__title">' + (r.title || '').replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</h3>' +
+              (price ? '<p class="product-card__price">' + price + '</p>' : '') +
+              '<p class="product-card__desc">' + short.replace(/</g, '&lt;').replace(/>/g, '&gt;') + '</p>' +
+            '</div></a>';
+        }).join('');
+
+        document.title = (p.title || 'Product') + ' — Hylinda Leather';
+        if (typeof window.history !== 'undefined' && window.history.replaceState) {
+          window.history.replaceState(null, '', '#product/' + p.id);
+        }
+        window.scrollTo(0, 0);
+        requestAnimationFrame(function() { window.scrollTo(0, 0); });
+      }
+
+      function showView(view, id) {
+        document.body.classList.remove('product-view');
+        document.getElementById('home-view').style.display = 'block';
+        document.getElementById('product-page').classList.remove('active');
+        document.getElementById('product-page').style.display = 'none';
+        document.title = 'Hylinda Leather — Hand Crafted Leather Goods';
+        if (view === 'home' && savedMainScrollY != null) {
+          var y = savedMainScrollY;
+          savedMainScrollY = null;
+          requestAnimationFrame(function() { window.scrollTo(0, y); });
+        }
+        if (view === 'product' && id) renderProductPage(id);
+      }
+
+      function onHashChange() {
+        var hash = window.location.hash || '';
+        var m = hash.match(/^#product\/(\d+)$/);
+        if (m) { renderProductPage(parseInt(m[1], 10)); return; }
+        showView('home');
+      }
+
+      document.getElementById('product-page-back').addEventListener('click', function(e) {
+        e.preventDefault();
+        window.location.hash = '';
+        showView('home');
+      });
+      function updateFullscreenImage() {
+        var overlay = document.getElementById('fullscreen-overlay');
+        if (!overlay.classList.contains('open') || !currentProductImages.length) return;
+        document.getElementById('fullscreen-overlay-img').src = imgUrl(currentProductImages[currentProductImageIndex]);
+      }
+      document.getElementById('fullscreen-overlay-prev').addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (!currentProductImages.length) return;
+        setProductImageIndex(currentProductImageIndex - 1);
+        updateFullscreenImage();
+      });
+      document.getElementById('fullscreen-overlay-next').addEventListener('click', function(e) {
+        e.stopPropagation();
+        if (!currentProductImages.length) return;
+        setProductImageIndex(currentProductImageIndex + 1);
+        updateFullscreenImage();
+      });
+      document.getElementById('fullscreen-overlay-close').addEventListener('click', function() {
+        document.getElementById('fullscreen-overlay').classList.remove('open');
+        document.body.style.overflow = '';
+      });
+      document.getElementById('fullscreen-overlay').addEventListener('click', function(e) {
+        if (e.target === this) {
+          this.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      });
+      document.addEventListener('keydown', function(e) {
+        var overlay = document.getElementById('fullscreen-overlay');
+        if (overlay.classList.contains('open')) {
+          if (e.key === 'Escape') {
+            overlay.classList.remove('open');
+            document.body.style.overflow = '';
+          } else if (e.key === 'ArrowLeft') {
+            setProductImageIndex(currentProductImageIndex - 1);
+            updateFullscreenImage();
+          } else if (e.key === 'ArrowRight') {
+            setProductImageIndex(currentProductImageIndex + 1);
+            updateFullscreenImage();
+          }
+        }
+      });
+      document.getElementById('logo-link').addEventListener('click', function(e) {
+        if (window.location.hash) { e.preventDefault(); window.location.hash = ''; showView('home'); }
+      });
+      window.addEventListener('hashchange', onHashChange);
+
+      document.getElementById('search').addEventListener('input', function() {
+        searchQuery = this.value.trim();
+        renderCards();
+      });
+
+      if (typeof window.history !== 'undefined' && window.history.scrollRestoration !== undefined) {
+        window.history.scrollRestoration = 'manual';
+      }
+      renderTags();
+      renderCards();
+      onHashChange();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+{
+  "siteName": "Hylinda Leather",
+  "tagline": "Hand crafted leather goods",
+  "siteDescription": "Your Personal Compass",
+  "heroHeadline": "Make Hylinda your personal compass to your next beautiful destination",
+  "about": {
+    "title": "About Us",
+    "story": [
+      "Creation and inspiration are two ideas that always intrigue us. We didn't know where to start from, we needed a compass to show us the way. So we came up with Hylinda Leather.",
+      "Hylinda Leather became our personal compass that guided us. We started taking pieces of pure leather and transforming them in something beautiful, a piece of work that reflected ourselves, what we were feeling and who we wanted to be.",
+      "The whole procedure is so important to us. That's why we always treat our products with love and care.",
+      "We are big fans of the whole traveling idea. We love exploring new destinations and even though we don't like cliché quotes we totally believe that difficult roads always lead to beautiful destinations. For our new destinations in life our bags became the compass that we needed back then.",
+      "We want Hylinda to be the compass that everyone needs in order to explore new destinations, to see beautiful places and find themselves through the process."
+    ],
+    "founderNote": "Hello everyone! I am Sotiria Karra. Recently I gave up my job as a shopping / fashion assistant because I wanted to create something on my own."
+  },
+  "contact": {
+    "email": "info@hylindaleather.com",
+    "address": "Kefallinias 14B, Petroupolis, Athens, 13231, Greece",
+    "facebook": "https://el-gr.facebook.com/HylindaLeather/"
+  },
+  "shipping": {
+    "summary": "We ship internationally. Most orders ship within 1–3 working days. Greece: free shipping, 1–3 days. EU: 3–7 working days. Shipment by ELTA courier."
+  }
+}
