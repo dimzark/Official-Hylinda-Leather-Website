@@ -1,12 +1,15 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useRef } from 'react';
 import { getImageUrl } from '../../lib/data';
+
+const SWIPE_THRESHOLD = 50;
 
 export default function ProductGallery({ product }) {
   const images = product.images && product.images.length ? product.images : product.featured_image ? [product.featured_image] : [];
   const [index, setIndex] = useState(0);
   const [fullscreen, setFullscreen] = useState(false);
+  const touchStartX = useRef(0);
 
   const currentImg = images[index];
   const currentSrc = currentImg ? getImageUrl(currentImg) : '';
@@ -18,13 +21,33 @@ export default function ProductGallery({ product }) {
     [images.length]
   );
 
+  const handleTouchStart = useCallback((e) => {
+    touchStartX.current = e.touches[0].clientX;
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (e) => {
+      if (images.length <= 1) return;
+      const endX = e.changedTouches[0].clientX;
+      const delta = endX - touchStartX.current;
+      if (delta < -SWIPE_THRESHOLD) go(1);   // swipe left -> next
+      if (delta > SWIPE_THRESHOLD) go(-1);   // swipe right -> prev
+    },
+    [images.length, go]
+  );
+
   if (!images.length) {
     return <div className="product-page__main-wrap" style={{ aspectRatio: 1, background: 'var(--off2)' }} />;
   }
 
   return (
     <>
-      <div className="product-page__main-wrap">
+      <div
+        className="product-page__main-wrap"
+        style={{ touchAction: 'pan-y' }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <img
           className="product-page__main-img"
           src={currentSrc}
@@ -92,8 +115,11 @@ export default function ProductGallery({ product }) {
             alignItems: 'center',
             justifyContent: 'center',
             padding: '2rem',
+            touchAction: 'pan-y',
           }}
           onClick={(e) => e.target === e.currentTarget && setFullscreen(false)}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
           <button
             type="button"

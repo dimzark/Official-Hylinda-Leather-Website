@@ -282,7 +282,10 @@ header .wrap {
 @media (max-width: 768px) {
   .hero { display: none; }
   .toolbar { display: none; }
-  .collection { padding-top: var(--space); }
+  .collection { padding-top: var(--space); padding-left: 0.5rem; padding-right: 0.5rem; }
+  .collection .wrap { padding-left: 0.5rem; padding-right: 0.5rem; }
+  .collection .product-card__desc { display: none; }
+  .products-grid { gap: 1.25rem; }
   .product-page__layout { grid-template-columns: 1fr; }
 }
 .product-page__gallery {
