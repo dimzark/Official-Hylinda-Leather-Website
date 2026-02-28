@@ -23,9 +23,12 @@ const TAG_MAP = [
 
 function stripHtml(html) {
   if (!html) return '';
-  const div = document.createElement('div');
-  div.innerHTML = String(html).replace(/\r\n/g, ' ').replace(/\n/g, ' ');
-  return (div.textContent || div.innerText || '').trim();
+  return String(html)
+    .replace(/<[^>]*>/g, ' ')
+    .replace(/\r\n/g, ' ')
+    .replace(/\n/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
 }
 
 function getProductTags(p) {
