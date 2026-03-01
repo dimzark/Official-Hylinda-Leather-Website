@@ -7,6 +7,7 @@
   --off2: #f5f5f5;
   --charcoal: #333333;
   --cognac: #8B4513;
+  --cta: #2D241E;
   --ink: #333333;
   --ink-light: #555;
   --ink-muted: #888;
@@ -128,7 +129,7 @@ header .wrap {
   font-weight: 500;
   letter-spacing: 0.08em;
   color: var(--off-white);
-  background: var(--charcoal);
+  background: var(--cta);
   border: 1px solid rgba(255, 255, 255, 0.4);
   border-radius: var(--radius);
   text-decoration: none;
@@ -444,7 +445,7 @@ header .wrap {
   font-weight: 500;
   letter-spacing: 0.05em;
   color: var(--white);
-  background: var(--ink);
+  background: var(--cta);
   border: none;
   border-radius: var(--radius);
   text-decoration: none;
@@ -485,5 +486,6 @@ footer a:hover { color: var(--ink); }
 .footer__contact span { display: inline-block; }
 .footer__contact a { display: inline-flex; align-items: center; color: var(--ink-muted); }
 .footer__contact a:hover { color: var(--ink); }
+.footer__email-link { gap: 0.35rem; text-decoration: none; }
 .footer__social-icon { width: 20px; height: 20px; }
 .footer__copyright { margin-top: 1.5rem; font-size: 0.8rem; color: var(--ink-muted); }
