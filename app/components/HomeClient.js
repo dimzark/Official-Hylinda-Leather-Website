@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { getImageUrl } from '../../lib/data';
 
@@ -43,10 +42,15 @@ function getProductTags(p) {
   return out;
 }
 
-export default function HomeClient({ products, brand }) {
-  const searchParams = useSearchParams();
-  const searchQuery = searchParams.get('q') || '';
+export default function HomeClient({ products, brand, initialSearchQuery = '' }) {
+  const [searchQuery, setSearchQuery] = useState(initialSearchQuery);
   const [activeTag, setActiveTag] = useState('all');
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const q = new URLSearchParams(window.location.search).get('q') || '';
+    setSearchQuery(q);
+  }, []);
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
