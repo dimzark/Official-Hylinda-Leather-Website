@@ -17,7 +17,6 @@ const TAG_MAP = [
   { key: 'cardholder', label: 'Cardholder' },
   { key: 'passport', label: 'Passport' },
   { key: 'moleskine', label: 'Moleskine' },
-  { key: 'accessories', label: 'Accessories' },
 ];
 
 function stripHtml(html) {
@@ -38,7 +37,6 @@ function getProductTags(p) {
     if (item.key === 'all') return;
     if (lower.indexOf(item.key) !== -1) out.push(item.key);
   });
-  if (out.length === 1) out.push('accessories');
   return out;
 }
 
