@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { getImageUrl } from '../../lib/data';
@@ -65,13 +65,25 @@ export default function HomeClient({ products, brand }) {
     });
   }, [products, activeTag, searchQuery]);
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const saved = sessionStorage.getItem('homeScrollPosition');
+    if (saved !== null) {
+      sessionStorage.removeItem('homeScrollPosition');
+      const y = parseInt(saved, 10);
+      if (!Number.isNaN(y)) window.scrollTo({ top: y, behavior: 'auto' });
+    } else if (window.location.hash === '#collection') {
+      document.getElementById('collection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }, []);
+
   return (
     <>
       <section
         className="hero"
         style={{ ['--hero-bg']: `url(${getImageUrl('2018/03/IMG_2810-copy-2.jpg')})` }}
       >
-        <h1>{brand.heroHeadline || 'Your personal compass'}</h1>
+        <h1>{brand.heroHeadline || 'Your Personal Compass'}</h1>
         <p>
           {(() => {
             const desc = brand.heroDesc || 'Genuine leather bags and accessories designed and handcrafted with care.';
@@ -83,7 +95,16 @@ export default function HomeClient({ products, brand }) {
             return desc;
           })()}
         </p>
-        <Link href="/#products-grid" className="hero-cta">
+        <Link
+          href="/#collection"
+          className="hero-cta"
+          onClick={(e) => {
+            if (typeof window !== 'undefined' && window.location.pathname === '/') {
+              e.preventDefault();
+              document.getElementById('collection')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+          }}
+        >
           Explore the Collection
         </Link>
       </section>
@@ -103,7 +124,7 @@ export default function HomeClient({ products, brand }) {
         </div>
       </section>
 
-      <section className="collection">
+      <section className="collection" id="collection">
         <div className="wrap">
           <h2>Collection</h2>
           <div className="products-grid" id="products-grid">
@@ -119,6 +140,11 @@ export default function HomeClient({ products, brand }) {
                   key={p.id}
                   href={`/product/${slug}`}
                   className="product-card"
+                  onClick={() => {
+                    if (typeof window !== 'undefined') {
+                      sessionStorage.setItem('homeScrollPosition', String(window.scrollY));
+                    }
+                  }}
                 >
                   <div className="product-card__img-wrap">
                     <img

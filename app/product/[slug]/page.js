@@ -48,8 +48,17 @@ function wrapDetailsBlock(html) {
   let s = String(html);
   s = s.replace(/<strong>\s*Details\s*:?\s*<\/strong>/gi, 'Details: ');
   s = s.replace(/<strong>\s*Details\s*<\/strong>\s*:?\s*/gi, 'Details: ');
-  return s.replace(
-    /(Details\s*:?\s*)(?:<\/[^>]+>)?\s*(?:\n|<br\s*\/?>)\s*((?:(?:[\u2022\u2042\u2043‣][^\n<]*(?:\n|<br\s*\/?>)\s*)*)(?:[\u2022\u2042\u2043‣][^\n<]*))/gi,
+  s = s.replace(/Details\s*:\s*:\s*/gi, 'Details: ');
+  // Convert <ul><li>...</li></ul> after "Details:" into bullet lines so the main regex can match
+  s = s.replace(
+    /Details\s*:?\s*(?:\s*(?:\n|<br\s*\/?>))*\s*<ul[^>]*>([\s\S]*?)<\/ul>/gi,
+    (_, ulContent) => {
+      const items = ulContent.replace(/<li[^>]*>([\s\S]*?)<\/li>/gi, (__, text) => '‣' + text.trim() + '\n').trim();
+      return 'Details:\n\n' + items;
+    }
+  );
+  s = s.replace(
+    /(Details\s*:?\s*)(?:<\/[^>]+>)?(?:\s*(?:\n|<br\s*\/?>))*\s*((?:(?:[\u2022\u2023\u2042\u2043•][^\n<]*(?:\n|<br\s*\/?>)\s*)*)(?:[\u2022\u2023\u2042\u2043•][^\n<]*))/gi,
     (_, _label, lines) => {
       const raw = lines.replace(/\n/g, '<br>').replace(/<br\s*\/?>/gi, '<br>').trim();
       const items = raw.split(/<br\s*\/?>/gi).map((line) => line.trim()).filter(Boolean);
@@ -65,9 +74,13 @@ function wrapDetailsBlock(html) {
         return 0;
       });
       const content = sorted.join('<br>');
-      return '<div class="product-page__details-block">' + content + '</div>';
+      return '<div class="product-page__details-break"></div><div class="product-page__details-block">' + content + '</div>';
     }
   );
+  s = s.replace(/\s*Details\s*:?\s*(?=\s|$)/gi, ' ');
+  s = s.replace(/\s*:\s*:\s*/g, ' ');
+  s = s.replace(/\s+:\s*(?=<|\s|$)/g, ' ');
+  return s.trim();
 }
 
 export async function generateStaticParams() {
@@ -153,6 +166,13 @@ export default function ProductPage({ params }) {
             {product.price && (
               <p className="product-page__price">€{product.price}</p>
             )}
+            <p className="product-page__order-note">Made to order. Inquire for availability and details.</p>
+            <a
+              href={`mailto:hylindaleather@gmail.com?subject=${encodeURIComponent('Interest in ' + (product.title || 'Product'))}&body=${encodeURIComponent('I would like to buy ' + (product.title || 'this product') + '. Can you give me more details about the availability?')}`}
+              className="product-page__order-btn"
+            >
+              Inquire for Availability
+            </a>
             <div
               className="product-page__description"
               dangerouslySetInnerHTML={{
@@ -165,13 +185,6 @@ export default function ProductPage({ params }) {
               ),
               }}
             />
-            <p className="product-page__order-note">Made to order. Inquire for availability and details.</p>
-            <a
-              href={`mailto:hylindaleather@gmail.com?subject=${encodeURIComponent('Interest in ' + (product.title || 'Product'))}&body=${encodeURIComponent('I would like to buy ' + (product.title || 'this product') + '. Can you give me more details about the availability?')}`}
-              className="product-page__order-btn"
-            >
-              Order / Inquire
-            </a>
           </div>
         </div>
         {related.length > 0 && (
