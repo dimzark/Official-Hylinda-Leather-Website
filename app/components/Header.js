@@ -35,22 +35,24 @@ export default function Header() {
             src={logoUrl}
             alt="Hylinda Leather"
             className="logo-img"
-            width={40}
-            height={40}
+            width={52}
+            height={52}
           />
           <div>
             <div className="logo-text">Hylinda Leather</div>
           </div>
         </Link>
-        <input
-          type="search"
-          className="header__search"
-          id="search"
-          placeholder="Search"
-          aria-label="Search products"
-          value={value}
-          onChange={onSearchChange}
-        />
+        {pathname === '/' && (
+          <input
+            type="search"
+            className="header__search"
+            id="search"
+            placeholder="Search"
+            aria-label="Search products"
+            value={value}
+            onChange={onSearchChange}
+          />
+        )}
       </div>
     </header>
   );

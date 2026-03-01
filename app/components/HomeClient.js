@@ -72,7 +72,20 @@ export default function HomeClient({ products, brand }) {
         style={{ ['--hero-bg']: `url(${getImageUrl('2018/03/IMG_2810-copy-2.jpg')})` }}
       >
         <h1>{brand.heroHeadline || 'Your personal compass'}</h1>
-        <p>{brand.heroDesc || 'Genuine leather bags and accessories — designed and handcrafted with care.'}</p>
+        <p>
+          {(() => {
+            const desc = brand.heroDesc || 'Genuine leather bags and accessories designed and handcrafted with care.';
+            const breakBefore = ' designed';
+            const i = desc.indexOf(breakBefore);
+            if (i >= 0) {
+              return <>{desc.slice(0, i)}<br />{desc.slice(i + 1)}</>;
+            }
+            return desc;
+          })()}
+        </p>
+        <Link href="/#products-grid" className="hero-cta">
+          Explore the Collection
+        </Link>
       </section>
 
       <section className="toolbar">
@@ -97,8 +110,9 @@ export default function HomeClient({ products, brand }) {
             {filtered.map((p) => {
               const slug = p.slug && p.slug !== String(p.id) ? p.slug : String(p.id);
               const imgSrc = (p.images && p.images[0]) ? getImageUrl(p.images[0]) : '';
-              const short = stripHtml(p.short_description || '').slice(0, 100);
-              const shortDisplay = short.length > 100 ? short + '…' : short;
+              const raw = stripHtml(p.short_description || '');
+              const short = raw.slice(0, 60);
+              const shortDisplay = raw.length > 60 ? short + '…' : short;
               const price = p.price ? '€' + p.price : '';
               return (
                 <Link

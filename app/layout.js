@@ -5,7 +5,7 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 
 const siteName = brand.siteName || 'Hylinda Leather';
-const description = brand.heroDesc || 'Genuine leather bags and accessories — designed and handcrafted with care.';
+const description = brand.heroDesc || 'Genuine leather bags and accessories designed and handcrafted with care.';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),

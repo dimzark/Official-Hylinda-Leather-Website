@@ -106,7 +106,7 @@ export default function ProductPage({ params }) {
 
   const related = products
     .filter((p) => p.id !== product.id)
-    .slice(0, 4);
+    .slice(0, 16);
 
   const jsonLd = {
     '@context': 'https://schema.org',
