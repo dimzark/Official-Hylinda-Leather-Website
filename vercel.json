@@ -1,10 +1,1 @@
-{
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.hylindaleather.com" }],
-      "destination": "https://hylindaleather.com/:path*",
-      "permanent": true
-    }
-  ]
-}
+{"redirects":[]}
