@@ -173,6 +173,14 @@ export default function HomeClient({ products, brand, initialSearchQuery = '' })
         </div>
       </section>
 
+      <section className="cover-section">
+        <img
+          src="/cover.jpg"
+          alt="How our leather bags are made"
+          className="cover-section__img"
+        />
+      </section>
+
       <section className="about" id="about">
         <div className="wrap">
           <h2>About</h2>
